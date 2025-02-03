@@ -1,0 +1,63 @@
+@import '../sass/variables';
+
+$theme-colors: (
+  'primary-900': #b22f00,
+  'primary-800': #ca3d00,
+  'primary-700': #d84400,
+  'primary-600': #e54b00,
+  'primary-500': #f05000,
+  'primary-400': #f36931,
+  'primary-300': #f58457,
+  'primary-200': #f8a687,
+  'primary-100': #fbc9b6,
+  'primary-50': #fff1ea,
+  'secondary-10': #f4f3ff,
+  'secondary-300':#8185c1,
+  'secondary-200':#a4a7d3,
+  'secondary-100':#d6d2ff,
+);
+
+$breadcrumb-divider: quote(">");
+$enable-responsive-font-sizes:true;
+
+@import '../../node_modules/bootstrap/scss/bootstrap';
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    @each $position in $positions {
+      .position#{$infix}-#{$position} { position: $position !important; }
+    }
+
+
+    .sticky#{$infix}-top {
+      @supports (position: sticky) {
+        position: sticky;
+        top: 0;
+        z-index: $zindex-sticky;
+      }
+    }
+  }
+}
+
+.btn {
+  //border-radius: 8px;
+}
+
+.btn-primary {
+  color: #fff;
+}
+
+.form-control {
+  border-radius: 5px;
+  border-color: $secondary;
+}
+.form-control:focus, button:focus, a:focus{
+  box-shadow: none !important;
+  outline:0;
+}
+
+
+
+

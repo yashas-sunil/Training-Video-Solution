@@ -1,0 +1,91 @@
+.bg-diamond {
+  position: relative;
+  overflow: hidden;
+
+  @mixin diamond {
+    content: '';
+    position: absolute;
+    height: 150px;
+    width: 150px;
+    border-radius: 22px;
+    background-color: theme-color-level(primary, -2);
+    z-index: -1;
+
+    opacity: 0.09;
+  }
+
+  @mixin bg-diamond-positions($parent) {
+    @include unify-parent(#{$parent}-top) {
+      top: 5%;
+    }
+
+    @include unify-parent(#{$parent}-middle) {
+      top: calc(50% - 75px);
+    }
+
+    @include unify-parent(#{$parent}-bottom) {
+      bottom: 5%;
+    }
+  }
+
+  @mixin bg-diamond-size($parent) {
+    @include unify-parent(#{$parent}-sm) {
+      height: 100px;
+      width: 100px;
+    }
+
+    @include unify-parent(#{$parent}-md) {
+      height: 150px;
+      width: 150px;
+    }
+
+    @include unify-parent(#{$parent}-lg) {
+      height: 230px;
+      width: 230px;
+    }
+  }
+
+  &#{&}-left {
+    $parent: &;
+
+    &::before {
+      @include diamond;
+
+      transform: rotate(45deg);
+      left: -2%;
+
+      @include unify-parent(#{$parent}-inner) {
+        left: -5%;
+      }
+
+      @include unify-parent(#{$parent}-full) {
+        left: 2%;
+      }
+
+      @include bg-diamond-positions($parent);
+      @include bg-diamond-size($parent);
+    }
+  }
+
+  &#{&}-right {
+    $parent: &;
+
+    &::after {
+      @include diamond;
+
+      transform: rotate(-45deg);
+      right: -2%;
+
+      @include unify-parent(#{$parent}-inner) {
+        right: -5%;
+      }
+
+      @include unify-parent(#{$parent}-full) {
+        right: 2%;
+      }
+
+      @include bg-diamond-positions($parent);
+      @include bg-diamond-size($parent);
+    }
+  }
+}
